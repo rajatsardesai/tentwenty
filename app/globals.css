@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+    --color-light-100: #eef4f9;
+    --color-gray-100: #7a7777;
+}
+
 @layer base {
     :root {
         --radius: 0.5rem;
@@ -32,8 +37,8 @@
     }
 
     /*Hero*/
-    .hero-text-container {
-        @apply absolute flex flex-col items-start justify-center text-white text-center mx-[135px] max-w-lg z-50;
+    .hero-content-container {
+        @apply absolute flex flex-col justify-center text-white text-center mx-[16px] md:mx-[135px] max-w-lg z-50;
     }
 
     .hero-banners {
@@ -41,8 +46,21 @@
     }
 
     .hero-header {
-            @apply text-[64px] leading-[64px] text-start mt-5 opacity-0;
-        }
+            @apply text-[46px] md:text-[64px] leading-[46px] md:leading-[64px] text-start mt-5 opacity-0;
+    }
+
+    /*Products*/
+    .products-container{
+        @apply flex flex-col sm:py-10 md:py-23;
+    }
+
+    .drag-cursor {
+        cursor: url('/icons/drag.svg'), grab;
+    }
+
+    .drag-cursor:active {
+        cursor: url('/icons/dragging.svg'), grabbing;
+    }
 
     /*Animations*/
     @keyframes fadeUp {
@@ -81,6 +99,28 @@
 
     .final-scale {
         transform: scale(1.10);
+    }
+
+    @keyframes border-move {
+        0% {
+            clip-path: inset(0 100% 100% 0);
+        }
+        25% {
+            clip-path: inset(0 0 100% 0);
+        }
+        50% {
+            clip-path: inset(0 0 0 100%);
+        }
+        75% {
+            clip-path: inset(100% 0 0 0);
+        }
+        100% {
+            clip-path: inset(0 100% 0 0);
+        }
+    }
+
+    .animate-border-move {
+        animation: border-move 5s linear forwards;
     }
 }
 
