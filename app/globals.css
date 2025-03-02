@@ -36,22 +36,80 @@
         @apply flex min-h-screen flex-1 flex-col;
     }
 
+    /*Header*/
+    .header {
+        @apply fixed top-0 md:top-5 left-0 right-0 flex justify-between items-center px-7 py-2 md:p-8 bg-white md:w-[calc(100%-40px)] md:mx-auto z-50
+    }
+
+    .header-button {
+        @apply flex justify-center items-center order-1 md:order-2 py-1 px-3 gap-8 md:gap-4 bg-white border-2
+    }
+
+    .nav-container {
+        @apply absolute md:static top-full left-0 right-0 bg-white shadow-lg md:bg-transparent md:shadow-none
+    }
+
+    .nav-list{
+        @apply flex flex-col md:flex-row items-center gap-5 p-5 md:p-2
+    }
+
     /*Hero*/
-    .hero-content-container {
-        @apply absolute flex flex-col justify-center text-white text-center mx-[16px] md:mx-[135px] max-w-lg z-50;
+    .hero-container {
+        @apply relative w-full flex items-center h-[810px] md:h-[900px] overflow-hidden max-md:px-2
     }
 
     .hero-banners {
         @apply absolute inset-0 w-full h-full object-cover transition-all duration-1000;
     }
 
+    .hero-banners.active {
+        @apply z-10;
+        transform: scale(1.10);
+    }
+
+    .hero-banners.inactive {
+        @apply z-0 brightness-80;
+    }
+
+    .hero-content-container {
+        @apply absolute flex flex-col justify-center text-white text-center mx-[16px] md:mx-[135px] max-w-lg z-50;
+    }
+
     .hero-header {
-            @apply text-[46px] md:text-[64px] leading-[46px] md:leading-[64px] text-start mt-5 opacity-0;
+            @apply text-[46px] md:text-[64px] leading-[46px] md:leading-[64px] text-start mt-5;
+    }
+
+    .hero-navigation {
+        @apply absolute flex flex-row justify-center text-white text-center mx-[16px] md:mx-[135px] max-w-lg z-50  items-center bottom-16 md:bottom-17 gap-10 md:gap-8;
+    }
+
+    .hero-button {
+        @apply relative flex justify-center items-center w-[115px] md:w-[138px] h-[115px] md:h-[138px] border-[0.1px] border-light-100 cursor-pointer;
+    }
+
+    .hero-button-slider-container{
+        @apply relative w-[77px] md:w-[93px] h-[77px] md:h-[93px] overflow-hidden;
+    }
+
+    .hero-button-slider-text{
+        @apply absolute top-1/2 left-1/2 z-50 text-white transform -translate-x-1/2 -translate-y-1/2
     }
 
     /*Products*/
     .products-container{
         @apply flex flex-col sm:py-10 md:py-23;
+    }
+
+    .products-text {
+        @apply max-w-[321px] md:max-w-[772px] mx-auto text-center space-y-5 md:space-y-16;
+    }
+
+    .fade-products-heading {
+        @apply text-3xl md:text-[56px] leading-[40px] opacity-0;
+    }
+
+    .fade-products-paragraph {
+        @apply md:text-2xl leading-[18px] md:leading-[28px] text-gray-100 px-1;
     }
 
     .drag-cursor {
@@ -60,6 +118,44 @@
 
     .drag-cursor:active {
         cursor: url('/icons/dragging.svg'), grabbing;
+    }
+
+    .product-card {
+        @apply absolute w-[233px] xl:w-[435px] h-[331px] xl:h-[619px] shadow-lg flex flex-col items-center justify-end text-white text-2xl mt-10 font-bold transition-all duration-300 ease-in-out bg-cover bg-center;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .product-card-text {
+        @apply w-full p-4 text-center;
+    }
+
+    .product-card-title {
+        @apply text-2xl md:text-4xl font-semibold mb-5;
+    }
+
+    .product-card-description {
+        @apply md:text-2xl text-gray-100;
+    }
+
+    /* Image Position Classes */
+    .card-left {
+        @apply -left-48 md:-left-28 top-5 md:top-10 rotate-[-10deg] scale-95 opacity-90 z-20;
+    }
+
+    .card-center {
+        @apply left-1/2 -translate-x-1/2 scale-100 rotate-0 z-30;
+    }
+
+    .card-right {
+        @apply -right-48 md:-right-20 top-5 md:top-10 rotate-[10deg] scale-95 opacity-90 z-20;
+    }
+
+    .card-far-left {
+        @apply -left-full rotate-[10deg] scale-80 opacity-60 z-10;
+    }
+
+    .card-far-right {
+        @apply -right-full rotate-[-10deg] scale-80 opacity-60 z-10;
     }
 
     /*Animations*/
@@ -97,86 +193,66 @@
         animation: revealAndZoom 2s ease-in-out;
     }
 
-    .final-scale {
-        transform: scale(1.10);
+    @keyframes border-top {
+        0% { width: 0; left: 0; }
+        25% { width: 100%; left: 0; }
+        100% { width: 100%; left: 0; }
     }
 
-    @keyframes border-move {
-        0% {
-            clip-path: inset(0 100% 100% 0);
-        }
-        25% {
-            clip-path: inset(0 0 100% 0);
-        }
-        50% {
-            clip-path: inset(0 0 0 100%);
-        }
-        75% {
-            clip-path: inset(100% 0 0 0);
-        }
-        100% {
-            clip-path: inset(0 100% 0 0);
-        }
+    @keyframes border-right {
+        0% { height: 0; top: 0; }
+        25% { height: 0; top: 0; }
+        50% { height: 100%; top: 0; }
+        100% { height: 100%; top: 0; }
     }
 
-    .animate-border-move {
-        animation: border-move 5s linear forwards;
-    }
-}
-
-@layer base {
-    :root {
-        --background: 0 0% 100%;
-        --foreground: 222.2 84% 4.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 222.2 84% 4.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 222.2 84% 4.9%;
-        --primary: 222.2 47.4% 11.2%;
-        --primary-foreground: 210 40% 98%;
-        --secondary: 210 40% 96.1%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215.4 16.3% 46.9%;
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 210 40% 98%;
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
-        --ring: 222.2 84% 4.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
-        --radius: 0.5rem;
+    @keyframes border-bottom {
+        0% { width: 0; right: 0; }
+        50% { width: 0; right: 0; }
+        75% { width: 100%; right: 0; }
+        100% { width: 100%; right: 0; }
     }
 
-    .dark {
-        --background: 222.2 84% 4.9%;
-        --foreground: 210 40% 98%;
-        --card: 222.2 84% 4.9%;
-        --card-foreground: 210 40% 98%;
-        --popover: 222.2 84% 4.9%;
-        --popover-foreground: 210 40% 98%;
-        --primary: 210 40% 98%;
-        --primary-foreground: 222.2 47.4% 11.2%;
-        --secondary: 217.2 32.6% 17.5%;
-        --secondary-foreground: 210 40% 98%;
-        --muted: 217.2 32.6% 17.5%;
-        --muted-foreground: 215 20.2% 65.1%;
-        --accent: 217.2 32.6% 17.5%;
-        --accent-foreground: 210 40% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 210 40% 98%;
-        --border: 217.2 32.6% 17.5%;
-        --input: 217.2 32.6% 17.5%;
-        --ring: 212.7 26.8% 83.9%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
+    @keyframes border-left {
+        0% { height: 0; bottom: 0; }
+        75% { height: 0; bottom: 0; }
+        100% { height: 100%; bottom: 0; }
+    }
+
+    .animated-border {
+        position: absolute;
+        background-color: white;
+    }
+
+    .border-top {
+        top: 0;
+        left: 0;
+        height: 8px;
+        animation: border-top 4s linear forwards;
+    }
+
+    .border-right {
+        right: 0;
+        top: 0;
+        width: 8px;
+        animation: border-right 4s linear forwards;
+    }
+
+    .border-bottom {
+        bottom: 0;
+        right: 0;
+        height: 8px;
+        animation: border-bottom 4s linear forwards;
+    }
+
+    .border-left {
+        bottom: 0;
+        left: 0;
+        width: 8px;
+        animation: border-left 4s linear forwards;
+    }
+
+    .animate-none .animated-border {
+        animation: none !important;
     }
 }
